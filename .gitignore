@@ -1,0 +1,10 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+
+# PyInstaller output (ECG-Format-Converter.spec / build.yml)
+build/
+dist/
