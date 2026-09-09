@@ -1,0 +1,11 @@
+numpy>=1.26
+pandas>=2.1
+scipy>=1.11
+tqdm>=4.66
+pydicom>=2.3,<3.0
+PyWavelets>=1.5
+lxml>=4.9
+EMD-signal>=1.4
+wfdb>=4.1
+matplotlib>=3.8
+PySide6>=6.6

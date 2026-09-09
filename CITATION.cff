@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: Krishna
+  given-names: Ajay
+  orcid: "https://orcid.org/0009-0002-5052-5510"
+- family-names: Keller
+  given-names: Till
+  orcid: "https://orcid.org/0000-0002-0895-6491"
+title: "ECG-Format-Converter"
+version: 1.0.0
+date-released: 2026-08-31
+url: "https://github.com/CeBiDa/ECG-Format-Converter"
