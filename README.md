@@ -65,23 +65,6 @@ Download, unzip, and run. No Python installation required. Builds are produced w
 4. Tick the **filter pipeline** steps you want. Under **Sampling**, tick *Input sampling rate* and pick (or type) the rate to read CSV/ASC files at — the panel tells you how many of the selected files need it — and enable **resampling** if needed. **Anonymize** removes ID, name, and birth date.
 5. Hit **Start processing**. Progress, per-file log lines, and counters update live; when the run ends, pick any record to inspect its 12-lead plot or open the summary table. Cancel stops after the current file and keeps everything already written.
 
-Input and output both start empty — nothing is pre-selected. Demo recordings ship in
-`data/input_ecgs/`, one per supported input format, so you can point the app there for a first run
-without any data of your own:
-
-| Demo file | Format | Rate | What it shows |
-| --- | --- | --- | --- |
-| `demo_rest_ecg.xml` | vendor XML | 500 Hz | 12 leads with full `patdata` demographics |
-| `demo_wfdb_ecg.dat` + `.hea` | WFDB | 500 Hz | signals in mV, no demographics |
-| `demo_matlab_ecg.mat` | MATLAB | 500 Hz | `val` matrix with `fs`, `study_id`, `age`, `sex` |
-| `demo_dicom_ecg.dcm` | DICOM waveform | 500 Hz | int16 microvolts, patient module filled in |
-| `demo_hl7_ecg.hl7` | HL7 aECG | 500 Hz | `AnnotatedECG` with one `SLIST_PQ` per lead |
-| `demo_8lead_ecg.csv` | CSV | none | 8 leads — III, aVR, aVL, aVF get derived |
-| `1042_demo_asc_ecg.asc` | ASC | none | 50 Hz mains hum and baseline drift to filter out |
-
-The two rate-less files are the ones that need a fallback rate. `1042_demo_asc_ecg.asc` is the only
-demo file `--metadata` applies to: the repo ships no metadata CSV, but any table with ID, sex and
-age columns and `1042` as an ID joins onto it by the leading digits of the file name.
 
 ### Command line
 
