@@ -2,7 +2,7 @@
 
 # ECG-Format-Converter
 
-This Python tool reads and writes raw **12-lead ECG recordings** across common research formats and converts between them if needed. Further, the tool allows to apply several pre-processing steps if needed. Supported ECG formats for reading and writing are MATLAB `.mat`, WFDB `.dat`/`.hea`, CSV, ASC, DICOM waveform `.dcm`, XML, and HL7 aECG. The optional signal-processing pipeline includes e.g. notch-filtering, bandpass, wavelet baseline removal, EMD denoising, and resampling. The app also is able to derives missing limb leads and optionally to anonymizes patient data. Besides the individual ECG output files one consolidated metadata table is created.
+This Python tool reads and writes raw **12-lead ECG recordings** across common research formats and converts between them if needed. Further, the tool allows to apply several pre-processing steps if needed. Supported ECG formats for reading and writing are MATLAB `.mat`, WFDB `.dat`/`.hea`, CSV, ASC, DICOM waveform `.dcm`, XML, and HL7 aECG. The optional signal-processing pipeline includes e.g. notch-filtering, bandpass, wavelet baseline removal, EMD denoising, and resampling. The app also is able to derive missing limb leads and optionally to anonymizes patient data. Besides the individual ECG output files one consolidated metadata table is created.
 
 ```
 ECG files (mat / wfdb / csv / asc / dcm / xml / hl7)  ──►  filtered, resampled 12-lead output (csv / xml / dcm / hl7 / wfdb / mat / asc)  +  ecg_summary.csv (metadata)
@@ -40,17 +40,16 @@ Ready-to-use executables of the cross-platform GUI app are built by GitHub Actio
 | macOS Apple Silicon (arm64) | `ECG-Format-Converter-macos-arm64.app.zip`    |
 | Linux x86_64                | `ECG-Format-Converter-linux-x86_64.zip`       |
 
-Download, unzip, and run. No Python installation required. Builds are produced with PyInstaller; pushing a `v*` tag builds all three and attaches them to a GitHub release automatically.
+Download, unzip, and run. No Python installation required. Builds are produced with PyInstaller.
 
 ## Features
 
-- **Seven input formats**: MATLAB `.mat` (keys `template`/`val`/`ecg`), WFDB `.dat`/`.hea` pairs, CSV, ASC, DICOM waveform `.dcm`, XML (`wavedata`/`ECG_RHYTHMS` schema with `patdata` demographics), and HL7 aECG (`AnnotatedECG`)
-- **Seven output formats**: CSV, XML, DICOM `.dcm`, HL7 aECG, WFDB `.dat`/`.hea` record pairs, MATLAB `.mat`, and ASC
-- **Signal-processing pipeline**: IIR notch (50 or 60 Hz), Butterworth bandpass 0.5-40 Hz, wavelet baseline removal (db4, level 8), EMD denoising (see [below](#emd-denoising)); steps run in the order given
-- **Resampling** to any target rate via FFT or linear interpolation
-- **Lead derivation**: missing limb leads are computed from Einthoven and Goldberger relations (I, II, III, aVR, aVL, aVF); every output carries the standard 12 leads in fixed order, underivable leads are zero-filled and reported
+- **Seven input and output formats**: MATLAB `.mat` (keys `template`/`val`/`ecg`), WFDB `.dat`/`.hea` pairs, CSV, ASC, DICOM waveform `.dcm`, XML (`wavedata`/`ECG_RHYTHMS` schema with `patdata` demographics), and HL7 aECG (`AnnotatedECG`)
+- optional **Signal-processing pipeline**: IIR notch (50 or 60 Hz), Butterworth bandpass 0.5-40 Hz, wavelet baseline removal (db4, level 8), EMD denoising (see [below](#emd-denoising)); steps run in the order given
+- optional **Resampling** to any target rate via FFT or linear interpolation
+- optional **Lead derivation**: missing limb leads are computed from Einthoven and Goldberger relations (I, II, III, aVR, aVL, aVF); every output carries the standard 12 leads in fixed order, underivable leads are zero-filled and reported
 - **Metadata carried through**: patient ID, name, birth date, sex, age, weight, height, pacemaker flag, exam date and time, P-wave annotations, all collected in `ecg_summary.csv`
-- **Anonymization** flag that drops patient ID, names, and birth date from outputs and the summary
+- opptional *Anonymization** flag that drops patient ID, names, and birth date from outputs and the summary
 - **Metadata mapping** for `.asc` batches: an external CSV with ID, sex, and age is joined onto the summary by the numeric filename prefix
 - **Cross-platform desktop GUI** with live progress, per-file log, processed/skipped/failed counters, a 12-lead waveform viewer in the standard 6x2 clinical layout, and a sortable summary table
 - **Batch behavior**: each file fails loudly on its own; one broken export never stops the run
@@ -59,7 +58,7 @@ Download, unzip, and run. No Python installation required. Builds are produced w
 
 ### Desktop app (GUI)
 
-1. Grab the executable for your OS from the [Releases](https://github.com/CeBiDa/ECG-Format-Converter/releases) page (or run `python ui.py`).
+1. Download the executable for your OS (Windows/MacOS/Linux) from the [Releases](https://github.com/CeBiDa/ECG-Format-Converter/releases) page (or run `python ui.py`).
 2. Select an **input** folder or single file. The app scans it immediately and shows a per-format count. You can also drop a file or folder anywhere on the window.
 3. Select an **output folder** and the target **format** (CSV, XML, DICOM, HL7 aECG, WFDB, MATLAB, or ASC).
 4. Tick the **filter pipeline** steps you want. Under **Sampling**, tick *Input sampling rate* and pick (or type) the rate to read CSV/ASC files at — the panel tells you how many of the selected files need it — and enable **resampling** if needed. **Anonymize** removes ID, name, and birth date.
@@ -141,7 +140,7 @@ Both in-repo copies are generated from the canonical file under `skills/`. After
 
 ## Output formats
 
-For each input file the tool writes one output file with the same stem and the chosen extension — except WFDB, which writes the record pair `<stem>.dat` + `<stem>.hea`. All outputs carry 12 leads in the fixed order `I,II,III,AVR,AVL,AVF,V1,V2,V3,V4,V5,V6`; leads that were neither recorded nor derivable are zero-filled.
+For each input ECG file the tool writes one output ECG file with the same stem and the chosen extension — except WFDB, which writes the record pair `<stem>.dat` + `<stem>.hea`. All outputs carry 12 leads in the fixed order `I,II,III,AVR,AVL,AVF,V1,V2,V3,V4,V5,V6`; leads that were neither recorded nor derivable are zero-filled.
 
 - **CSV**: n_samples rows x 12 columns, header = lead names, one amplitude value per cell.
 - **XML**: a `<metadata>` block (patient, exam, lead provenance) followed by one `<lead name="...">` element per lead with the comma-separated waveform.
