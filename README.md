@@ -8,6 +8,8 @@ This Python tool reads and writes raw **12-lead ECG recordings** across common r
 ECG files (mat / wfdb / csv / asc / dcm / xml / hl7)  ──►  filtered, resampled 12-lead output (csv / xml / dcm / hl7 / wfdb / mat / asc)  +  ecg_summary.csv (metadata)
 ```
 
+NEW [09/2026] V1.2.0: Pacemaker Spike Detection
+
 ---
 
 ## Table of contents
@@ -48,6 +50,7 @@ Download, unzip, and run. No Python installation required. Builds are produced w
 - optional **Signal-processing pipeline**: IIR notch (50 or 60 Hz), Butterworth bandpass 0.5-40 Hz, wavelet baseline removal (db4, level 8), EMD denoising (see [below](#emd-denoising)); steps run in the order given
 - optional **Resampling** to any target rate via FFT or linear interpolation
 - optional **Lead derivation**: missing limb leads are computed from Einthoven and Goldberger relations (I, II, III, aVR, aVL, aVF); every output carries the standard 12 leads in fixed order, underivable leads are zero-filled and reported
+- optional **Pacemaker Detection** using rwa ECG data before application of any filter
 - **Metadata carried through**: patient ID, name, birth date, sex, age, weight, height, pacemaker flag, exam date and time, P-wave annotations, all collected in `ecg_summary.csv`
 - opptional *Anonymization** flag that drops patient ID, names, and birth date from outputs and the summary
 - **Metadata mapping** for `.asc` batches: an external CSV with ID, sex, and age is joined onto the summary by the numeric filename prefix
