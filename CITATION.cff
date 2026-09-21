@@ -17,6 +17,7 @@ authors:
   given-names: Till
   orcid: "https://orcid.org/0000-0002-0895-6491"
 title: "ECG-Format-Converter"
-version: 1.0.0
+version: 1.2.0
+doi: 10.5281/zenodo.22871601
 date-released: 2026-09-09
 url: "https://github.com/CeBiDa/ECG-Format-Converter"
