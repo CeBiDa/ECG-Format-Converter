@@ -12,6 +12,12 @@ ECG files (mat / wfdb / csv / asc / dcm / xml / hl7)  ──►  filtered, resam
 
 NEW [09/2026] V1.2.0: Pacemaker Spike Detection
 
+<p align="center">
+  <img src="docs/images/gui-waveforms.png" width="100%" alt="ECG-Format-Converter desktop app: settings panel on the left, 12-lead waveform viewer in the 6x2 layout on the right">
+  <br>
+  <sub>The desktop app after a batch run: 16 synthetic recordings in seven input formats, converted to DICOM with notch + bandpass filtering and resampled to 250 Hz.</sub>
+</p>
+
 ---
 
 ## Table of contents
