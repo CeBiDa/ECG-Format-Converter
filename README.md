@@ -3,7 +3,7 @@
 
 # ECG-Format-Converter
 
-This Python tool reads and writes raw **12-lead ECG recordings** across common research formats and converts between them if needed. Further, the tool allows to apply several pre-processing steps if needed. Supported ECG formats for reading and writing are MATLAB `.mat`, WFDB `.dat`/`.hea`, CSV, ASC, DICOM waveform `.dcm`, XML, and HL7 aECG. The optional signal-processing pipeline includes e.g. notch-filtering, bandpass, wavelet baseline removal, EMD denoising, and resampling. The app also is able to derive missing limb leads and optionally to anonymizes patient data. Besides the individual ECG output files one consolidated metadata table is created.
+This Python tool reads and writes raw **12-lead ECG recordings** across common research formats and converts into another if needed. Further, the tool allows to apply several pre-processing steps if needed. Supported ECG formats for reading and writing are MATLAB `.mat`, WFDB `.dat`/`.hea`, CSV, ASC, DICOM waveform `.dcm`, XML, and HL7 aECG. The optional signal-processing pipeline includes e.g. notch-filtering, bandpass, wavelet baseline removal, EMD denoising, and resampling. The app also is able to derive missing limb leads and optionally to anonymizes patient data. Besides the individual ECG output files one consolidated metadata table is created.
 
 ```
 ECG files (mat / wfdb / csv / asc / dcm / xml / hl7)  ──►  filtered, resampled 12-lead output (csv / xml / dcm / hl7 / wfdb / mat / asc)  +  ecg_summary.csv (metadata)
